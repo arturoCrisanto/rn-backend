@@ -1,5 +1,8 @@
 import { formatDateTime } from "./dateFormat.js";
 
+// This logs messages with different severity levels
+//  with the format time and level included in the log message
+// Example: [INFO] 2024-06-01 12:00:00: Server started successfully
 export const logger = {
   info: (message) => {
     console.log(`[INFO] ${formatDateTime(new Date())}: ${message}`);

@@ -3,7 +3,11 @@ import https from "https";
 import "dotenv/config";
 import { logger } from "../utils/helpers/logger.js";
 
+
+//need to sync with the server health endpoint every 14 minutes
+//so need to create a /api/health endpoint in server.js
 const job = new cron.CronJob("*/14 * * * *", function () {
+  //send GET request to the /api/health endpoint
   https
     .get(`${process.env.API_URL}/api/health`, (res) => {
       if (res.statusCode === 200) {

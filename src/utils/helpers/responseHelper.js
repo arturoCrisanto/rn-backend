@@ -1,3 +1,4 @@
+// Function to send success responses
 export const sendSuccessResponse = (
   res,
   data,
@@ -11,6 +12,7 @@ export const sendSuccessResponse = (
   });
 };
 
+// Function to send error responses
 export const sendErrorResponse = (
   res,
   message = "Error",

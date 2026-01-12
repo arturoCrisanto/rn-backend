@@ -71,18 +71,25 @@ export async function deleteTransaction(req, res) {
 export async function getSummaryByUserId(req, res) {
   try {
     const { userId } = req.params;
-
+    // Aggregate transactions to calculate balance, income, and expenses
     const result = await Transaction.aggregate([
+      // match transactions for the specific user
       { $match: { userId } },
       {
+        //group all transactions to calculate the summary
         $group: {
           _id: null,
+          // this is for total balance
           balance: { $sum: "$amount" },
+
+          // this is for total income
           income: {
             $sum: {
               $cond: [{ $gt: ["$amount", 0] }, "$amount", 0],
             },
           },
+
+          // this is for total expenses
           expenses: {
             $sum: {
               $cond: [{ $lt: ["$amount", 0] }, "$amount", 0],
@@ -92,6 +99,7 @@ export async function getSummaryByUserId(req, res) {
       },
     ]);
 
+    // if there are no transactions, return zeros
     const summary = result[0] || {
       balance: 0,
       income: 0,

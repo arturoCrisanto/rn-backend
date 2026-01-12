@@ -14,6 +14,8 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// NODE_ENV TESTING means the server is running in a testing environment
+// we don't want to start the cron job in testing environment
 if (process.env.NODE_ENV !== "TESTING") {
   job.start();
 }
@@ -25,12 +27,14 @@ app.use(express.json());
 
 // Routes
 app.get("/api/health", (req, res) => {
+  // the null is for data parameter in sendSuccessResponse
   sendSuccessResponse(res, null, "Server is healthy", 200);
 });
 
 app.use("/api/transactions", transactionRoutes);
 
 app.listen(PORT, () => {
+  // this is to determine the base URL based on environment
   const baseUrl =
     process.env.NODE_ENV === "production"
       ? process.env.API_URL

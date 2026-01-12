@@ -4,7 +4,10 @@ import { logger } from "../utils/helpers/logger.js";
 
 const ratelimiter = async (req, res, next) => {
   try {
+    // Get client IP address from request
     const ip = req.clientIp;
+
+    // this is for limiting requests using upstash ratelimit
     const { success } = await ratelimit.limit(`ratelimit_${ip}`);
     if (!success) {
       return sendErrorResponse(
@@ -13,6 +16,7 @@ const ratelimiter = async (req, res, next) => {
         429
       );
     }
+    // if rate limit not exceeded, proceed to next middleware or route handler
     next();
   } catch (error) {
     logger.error(`Rate Limiter Error: ${error.message}`);
