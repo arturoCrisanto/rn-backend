@@ -5,11 +5,6 @@ import {
   sendErrorResponse,
 } from "../utils/helpers/responseHelper.js";
 
-/**
- * GET transactions by user
- * SQL:
- * SELECT * FROM transactions WHERE user_id = ? ORDER BY created_at DESC
- */
 export async function getTransactionsByUserId(req, res) {
   try {
     const { userId } = req.params;
@@ -29,11 +24,6 @@ export async function getTransactionsByUserId(req, res) {
   }
 }
 
-/**
- * CREATE transaction
- * SQL:
- * INSERT INTO transactions (...) RETURNING *
- */
 export async function createTransaction(req, res) {
   try {
     const { title, amount, category, user_id } = req.body;
@@ -61,11 +51,6 @@ export async function createTransaction(req, res) {
   }
 }
 
-/**
- * DELETE transaction
- * SQL:
- * DELETE FROM transactions WHERE id = ? RETURNING *
- */
 export async function deleteTransaction(req, res) {
   try {
     const { id } = req.params;
@@ -83,11 +68,6 @@ export async function deleteTransaction(req, res) {
   }
 }
 
-/**
- * SUMMARY by user
- * SQL:
- * SUM(amount), SUM(amount > 0), SUM(amount < 0)
- */
 export async function getSummaryByUserId(req, res) {
   try {
     const { userId } = req.params;
