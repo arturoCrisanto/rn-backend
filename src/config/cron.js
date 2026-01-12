@@ -1,7 +1,9 @@
 import cron from "cron";
 import https from "https";
 import "dotenv/config";
-import { logger } from "../utils/helpers/logger";
+import { logger } from "../utils/helpers/logger.js";
+
+logger.info(`API_URL is set to: ${process.env.API_URL}`);
 
 const job = new cron.CronJob("*/14 * * * *", function () {
   https
