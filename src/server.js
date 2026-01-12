@@ -24,6 +24,10 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+app.get("/api/health", (req, res) => {
+  sendSuccessResponse(res, 200, "Server is healthy", null);
+});
+
 app.use("/api/transactions", transactionRoutes);
 
 app.listen(PORT, () => {
