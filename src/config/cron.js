@@ -5,9 +5,9 @@ import { logger } from "../utils/helpers/logger.js";
 
 const job = new cron.CronJob("*/2 * * * *", function () {
   https
-    .get(process.env.API_URL, (res) => {
+    .get(`${process.env.API_URL}/api/health`, (res) => {
       if (res.statusCode === 200) {
-        logger.info("GET request sent successfully");
+        logger.info("GET request sent successfully from CRON job");
       } else
         logger.error(
           `Failed to send GET request for CRON job. Status code: ${res.statusCode}`
