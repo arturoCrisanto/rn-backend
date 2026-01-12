@@ -3,8 +3,6 @@ import https from "https";
 import "dotenv/config";
 import { logger } from "../utils/helpers/logger.js";
 
-logger.info(`API_URL is set to: ${process.env.API_URL}`);
-
 const job = new cron.CronJob("*/14 * * * *", function () {
   https
     .get(process.env.API_URL, (res) => {
@@ -12,7 +10,7 @@ const job = new cron.CronJob("*/14 * * * *", function () {
         logger.info("GET request sent successfully");
       } else
         logger.error(
-          `Failed to send GET request. Status code: ${res.statusCode}`
+          `Failed to send GET request for CRON job. Status code: ${res.statusCode}`
         );
     })
     .on("error", (e) => logger.error("Error while sending request", e));

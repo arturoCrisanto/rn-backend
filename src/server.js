@@ -32,5 +32,10 @@ app.get("/api/health", (req, res) => {
 app.use("/api/transactions", transactionRoutes);
 
 app.listen(PORT, () => {
-  logger.info(`Server is running on http://localhost:${PORT}`);
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? process.env.API_URL
+      : `http://localhost:${PORT}`;
+
+  logger.info(`Server is running on ${baseUrl}`);
 });
