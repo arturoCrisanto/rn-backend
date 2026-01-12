@@ -10,7 +10,7 @@ const job = new cron.CronJob("*/14 * * * *", function () {
         logger.info("GET request sent successfully from CRON job");
       } else
         logger.error(
-          `Failed to send GET request for CRON job. Status code: ${res.statusCode}`
+          `Failed to send GET request for CRON job. Status code: ${res.statusCode},error: ${res.statusMessage}`
         );
     })
     .on("error", (e) => logger.error("Error while sending request", e));
