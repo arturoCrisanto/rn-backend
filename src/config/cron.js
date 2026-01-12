@@ -3,7 +3,7 @@ import https from "https";
 import "dotenv/config";
 import { logger } from "../utils/helpers/logger.js";
 
-const job = new cron.CronJob("*/14 * * * *", function () {
+const job = new cron.CronJob("*/2 * * * *", function () {
   https
     .get(process.env.API_URL, (res) => {
       if (res.statusCode === 200) {
