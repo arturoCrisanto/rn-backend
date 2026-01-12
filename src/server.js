@@ -23,11 +23,6 @@ app.use(ratelimiter);
 app.use(cors());
 app.use(express.json());
 
-app.get("/api/health", (req, res) => {
-  logger.info("Health check endpoint called");
-  sendSuccessResponse(res, 200, "Server is healthy");
-});
-
 // Routes
 app.use("/api/transactions", transactionRoutes);
 
