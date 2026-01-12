@@ -25,7 +25,7 @@ app.use(express.json());
 
 // Routes
 app.get("/api/health", (req, res) => {
-  sendSuccessResponse(res, 200, "Server is healthy", null);
+  sendSuccessResponse(res, null, "Server is healthy", 200);
 });
 
 app.use("/api/transactions", transactionRoutes);
