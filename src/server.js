@@ -16,10 +16,6 @@ app.use(ratelimiter);
 app.use(cors());
 app.use(express.json());
 
-app.get("/api/test", (req, res) => {
-  res.send("API is running...");
-});
-
 // Routes
 app.use("/api/transactions", transactionRoutes);
 
