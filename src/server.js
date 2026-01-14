@@ -14,9 +14,8 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// NODE_ENV TESTING means the server is running in a testing environment
-// we don't want to start the cron job in testing environment
-if (process.env.NODE_ENV !== "TESTING") {
+// Only start cron job in production environment
+if (process.env.NODE_ENV === "production") {
   job.start();
 }
 
